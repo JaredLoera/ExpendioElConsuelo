@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-    apiUrl: 'http://localhost:3333/api',
+    apiUrl: 'http://buenasnochis.serveminecraft.net/api',
   storageNames: {
     token: "token",
     user: "user"
