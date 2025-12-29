@@ -4,6 +4,7 @@ import { CreateOrderComponent } from './pages/create-order/create-order.componen
 import { LoginComponent } from './pages/login/login.component';
 import { MySalesComponent } from './pages/my-sales/my-sales.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { authGuard } from './core/guards/auth/auth-guard';
 export const routes: Routes = [
   
 
@@ -27,7 +28,8 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [authGuard]
   }
   ,
     {
