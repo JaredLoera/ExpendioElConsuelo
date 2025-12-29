@@ -28,10 +28,11 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
-  },
+  }
+  ,
     {
     path: '',
-    redirectTo: 'dashboard/home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
 ];
