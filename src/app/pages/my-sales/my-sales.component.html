@@ -1,3 +1,46 @@
-<p>
-  my-sales works!
-</p>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Histórico de Ventas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-top">
+  <ion-card class="resumen-card">
+    <ion-card-content>
+      <div class="total-ventas-dia">
+        <p>Total Acumulado</p>
+        <h1>${{ calcularGranTotal() }}</h1>
+      </div>
+      <ion-badge color="success" mode="ios">
+        {{ ventas.length }} productos vendidos
+      </ion-badge>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list lines="full">
+    <ion-list-header>
+      <ion-label>Detalle por producto</ion-label>
+    </ion-list-header>
+
+    @for (venta of ventas; track venta.id) {
+    <ion-item>
+      <ion-avatar slot="start" class="venta-avatar">
+        <div class="cantidad-badge">{{ venta.quantity }}</div>
+      </ion-avatar>
+      
+      <ion-label>
+        <h2>{{ venta.name }}</h2>
+        <p>Cant. vendida: {{ venta.quantity }} unidades</p>
+      </ion-label>
+
+      <ion-note slot="end" class="monto-total">
+        ${{ venta.total  }}
+      </ion-note>
+    </ion-item>
+    }
+  </ion-list>
+</ion-content>

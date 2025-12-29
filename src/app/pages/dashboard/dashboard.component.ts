@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonTab,
   IonTabBar,
   IonTabButton,
   IonTabs,
-  IonLabel,
-  IonIcon
+  IonTitle,
+  IonToolbar,
+  IonLabel
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { library, playCircle, radio, search } from 'ionicons/icons';
@@ -13,16 +18,15 @@ import { library, playCircle, radio, search } from 'ionicons/icons';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-    imports: [IonIcon,
-    IonTabBar,
-    IonTabButton,
-    IonTabs,
-    IonLabel
-  ],
+   imports: [IonIcon, IonTabBar, IonTabButton, IonTabs,IonLabel],
+
 })
 export class DashboardComponent  implements OnInit {
 
-  constructor() { }
+  constructor() { 
+        addIcons({ library, playCircle, radio, search });
+
+  }
 
   ngOnInit() {}
 
