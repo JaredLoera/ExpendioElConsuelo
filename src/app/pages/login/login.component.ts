@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
           next: (userProfile: user) => {
             this.userProfile = userProfile;
             localStorage.setItem(environment.storageNames.user, JSON.stringify(userProfile));
-            this.router.navigate(['']);
+            this.router.navigate(['/dashboard/home']);
           },
           error: (error) => {
             console.error('Error fetching user profile:', error);
