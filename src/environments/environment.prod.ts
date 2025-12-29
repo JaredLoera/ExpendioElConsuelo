@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-    apiUrl: 'http://localhost:3333/api',
+    apiUrl: 'http://buenasnochis.serveminecraft.net/api',
   storageNames: {
     token: "token",
     user: "user"
