@@ -2,27 +2,33 @@ import { Routes } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CreateOrderComponent } from './pages/create-order/create-order.component';
 import { LoginComponent } from './pages/login/login.component';
+import { MySalesComponent } from './pages/my-sales/my-sales.component';
 export const routes: Routes = [
   
-  {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
-  },
+
   {
     path: 'dashboard',
     component: DashboardComponent,
     children: [
       {
-        path: '',
+        path: 'home',
         component: CreateOrderComponent
+      },
+      {
+        path: 'my-sales',
+        component: MySalesComponent
       }
     ]
   },
   {
     path: 'login',
     component: LoginComponent
-  }
+  },
+    {
+    path: '',
+    redirectTo: 'dashboard/home',
+    pathMatch: 'full'
+  },
 ];
 
 

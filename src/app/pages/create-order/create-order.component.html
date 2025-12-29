@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/dashboard/home"></ion-back-button>
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
     </ion-buttons>
     <ion-title style="text-align:center;">Registrar venta</ion-title>
   </ion-toolbar>
@@ -148,8 +148,8 @@
       <ion-note slot="end"><h1>${{ totalVenta }}</h1></ion-note>
     </ion-item>
     <div class="ion-padding">
-      <ion-button expand="block" color="primary" shape="round">
-        ENVIAR PEDIDO A API
+      <ion-button expand="block" color="primary" shape="round" (click)="createOrderPost()">
+        Guardar Venta
       </ion-button>
     </div>
   </div>

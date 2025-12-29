@@ -1,14 +1,55 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ViewWillEnter } from '@ionic/angular';import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+
+  IonButtons,
+  IonBackButton, IonList, IonCard, IonBadge, IonListHeader, IonLabel, IonItem, IonAvatar, IonNote, IonCardContent } from '@ionic/angular/standalone';
+
+import { Resumenes } from 'src/app/core/services/resumenes/resumenes';
+import { resumProducts } from 'src/app/core/interfaces/resumProducts';
 
 @Component({
   selector: 'app-my-sales',
   templateUrl: './my-sales.component.html',
   styleUrls: ['./my-sales.component.css'],
+    imports: [
+      IonCardContent, 
+      IonNote, IonAvatar, IonItem, IonLabel, IonListHeader, IonBadge, IonCard, IonList, 
+      IonHeader,
+    IonButtons,
+    IonBackButton,
+    FormsModule,
+    IonContent,
+    IonTitle,
+    IonToolbar,
+
+  ]
 })
-export class MySalesComponent  implements OnInit {
+export class MySalesComponent  implements  ViewWillEnter {
 
-  constructor() { }
+  constructor(private resumenesService: Resumenes) { }
+ventas: resumProducts[] = [];
 
-  ngOnInit() {}
+getResumenes() {
+    this.resumenesService.getResumenForUser().subscribe({
+      next: (data: resumProducts[]) => {
+        this.ventas = data;
+      },
+      error: (error) => {
+      console.error('Error fetching sales summary:', error);
+    }
+  });
+}
+ionViewWillEnter(): void {
+this.getResumenes();
+}
 
+
+calcularGranTotal(): number {
+  return this.ventas.reduce((acc, curr) => acc + parseFloat(curr.total), 0);
+}
 }
