@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="perfil-container">
+    <h2 class="nombre">Nombre Completo</h2>
+    <div class="info-list">
+      <ion-item lines="none">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-label>{{ user?.email }}</ion-label>
+      </ion-item>
+    </div>
+
+    <ion-button expand="block" color="primary" fill="outline" class="boton-datos" [disabled]="true">
+      Cambiar datos
+    </ion-button>
+
+    <ion-button expand="block" color="danger" fill="solid" class="boton-salir" (click)="logout()">
+      Cerrar sesión
+    </ion-button>
+  </div>
+</ion-content>
