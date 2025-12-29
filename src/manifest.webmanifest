@@ -1,34 +1,11 @@
-import { Routes } from '@angular/router';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { CreateOrderComponent } from './pages/create-order/create-order.component';
-import { LoginComponent } from './pages/login/login.component';
-export const routes: Routes = [
-  
-  {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    children: [
-      {
-        path: '',
-        component: CreateOrderComponent
-      }
-    ]
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  }
-];
-
-
-
-
-/*
+{"name": "Expendio El Consuelo",
+  "short_name": "EpnElConsuelo",
+  "icons": [
+    {
+      "src": "assets/icons/icon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
     {
       "src": "assets/icons/icon-72x72.png",
       "sizes": "72x72",
@@ -60,6 +37,11 @@ export const routes: Routes = [
       "type": "image/png"
     },
     {
+      "src": "assets/icons/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
       "src": "assets/icons/icon-384x384.png",
       "sizes": "384x384",
       "type": "image/png"
@@ -67,7 +49,11 @@ export const routes: Routes = [
     {
       "src": "assets/icons/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "type": "image/png"
     }
-      */
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000"
+}

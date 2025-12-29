@@ -1,0 +1,14 @@
+<ion-content class="login-page">
+  <div class="login-container">
+      <img src="https://ps.w.org/login-customizer/assets/icon-256x256.png?rev=2455454" alt="Logo" class="logo" />
+    <h1 class="title">El consuelo Expendio</h1>
+    <p class="subtitle">Inicia sesión en tu cuenta</p>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <label for="email">email: </label>
+      <ion-input id="email" type="email" formControlName="email" class="email-input" />
+      <label for="password">password: </label>
+      <ion-input id="password" type="password" formControlName="password" />
+      <ion-button type="submit" [disabled]="!loginForm.valid" class="login-button">Iniciar sesión</ion-button>
+    </form>
+  </div>
+</ion-content>

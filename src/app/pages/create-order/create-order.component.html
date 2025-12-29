@@ -1,0 +1,157 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align:center;">Registrar venta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+  <ion-button id="open-modal" expand="block" color="secondary">
+    <ion-icon name="add-outline" slot="start"></ion-icon> Añadir Producto
+  </ion-button>
+  <ion-list-header>
+    <h3>Detalle de Venta</h3>
+  </ion-list-header>
+<ion-list>
+  @for (item of carritoVisual; track $index) {
+  <ion-item-sliding>
+    <ion-item>
+      <ion-label>
+        <h2>{{ item.nombre }}</h2>
+        <p>Cantidad: {{ item.cantidad }}</p>
+      </ion-label>
+      <ion-note slot="end" color="dark">${{ item.subtotal }}</ion-note>
+    </ion-item>
+
+    <ion-item-options side="end">
+      <ion-item-option color="danger" (click)="eliminarProducto($index)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+  }
+</ion-list>
+
+
+<ion-content class="ion-padding">
+  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          @if(paso == 1){
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancelar</ion-button>
+          </ion-buttons>
+          }
+          @else {
+          <ion-button slot="start" fill="clear" (click)="paso = paso - 1">
+            <ion-icon name="arrow-back"></ion-icon>
+          </ion-button>
+          }
+          <ion-title>Seleccione el producto</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true">Agregar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        @if (paso === 1) {
+        <ion-grid>
+          <ion-row>
+            @for (marca of listBrands; track $index) {
+            <ion-col size="6" (click)="seleccionarMarca(marca.name, marca.id!)">
+              <div class="card-marca" [style.background-image]="'url(' + marca.imagen + ')'">
+                <div class="overlay">
+                  <span>{{ marca.name }}</span>
+                </div>
+              </div>
+            </ion-col>
+            }
+          </ion-row>
+        </ion-grid>
+        }
+
+        @if (paso === 2) {
+        <div class="presentacion-container">
+          <ion-item lines="none" class="header-seleccion">
+            <ion-label>Marca: <b style="color: var(--ion-color-primary);">{{ seleccion.marca }}</b></ion-label>
+          </ion-item>
+
+          <ion-list-header>
+            <h4>Seleccione Presentación:</h4>
+          </ion-list-header>
+
+          <ion-grid>
+            <!--NO SE OBTUBIERON PRODUCTOS-->
+
+            @if (listProducts.length === 0) {
+            <div class="no-products">
+              <p style="font-weight: bold;">No se encontraron productos para la marca seleccionada.</p>
+            </div>
+            }
+            <ion-row>
+              @for (product of listProducts; track $index) {
+              <ion-col size="6">
+                <div class="card-producto" (click)="seleccionarPresentacion(product)">
+                  <div class="info-texto">
+                    <span class="nombre-prod">{{ product.name }}</span>
+                  </div>
+                  <div class="thumb-container">
+                    <img [src]="product.imagen" [alt]="product.name">
+                  </div>
+                </div>
+              </ion-col>
+              }
+            </ion-row>
+          </ion-grid>
+        </div>
+        }
+        @if (paso === 3) {
+        <div class="confirmacion-container">
+          <div class="producto-resumen">
+            <ion-badge color="primary">{{ seleccion.marca }}</ion-badge>
+            <h2>{{ seleccion.presentacion }}</h2>
+            <h3 style="color: var(--ion-color-success)">${{ seleccion.precioUnitario }} c/u</h3>
+          </div>
+
+          <div class="selector-cantidad">
+            <p>Cantidad a vender</p>
+            <div class="controles">
+              <ion-button fill="clear" (click)="cambiarCantidad(-1)"><ion-icon
+                  name="remove-circle-outline"></ion-icon></ion-button>
+              <ion-input type="number" [(ngModel)]="seleccion.cantidad" readonly="true"></ion-input>
+              <ion-button fill="clear" (click)="cambiarCantidad(1)"><ion-icon
+                  name="add-circle-outline"></ion-icon></ion-button>
+            </div>
+          </div>
+
+          <div class="subtotal-display">
+            <p>Subtotal: <b>${{ seleccion.cantidad * seleccion.precioUnitario }}</b></p>
+          </div>
+
+          <ion-button expand="block" shape="round" color="success" (click)="confirm()" style="margin-top: 30px;">
+            <ion-icon name="cart-outline" slot="start"></ion-icon>
+            Agregar a la lista
+          </ion-button>
+        </div>
+        }
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+@if(totalVenta > 0){
+<ion-footer class="ion-no-border">
+  <div class="total-footer">
+    <ion-item lines="none">
+      <ion-label><h1>TOTAL</h1></ion-label>
+      <ion-note slot="end"><h1>${{ totalVenta }}</h1></ion-note>
+    </ion-item>
+    <div class="ion-padding">
+      <ion-button expand="block" color="primary" shape="round">
+        ENVIAR PEDIDO A API
+      </ion-button>
+    </div>
+  </div>
+</ion-footer>
+}
