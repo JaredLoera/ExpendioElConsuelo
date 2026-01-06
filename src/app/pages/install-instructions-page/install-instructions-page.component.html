@@ -1,0 +1,53 @@
+<ion-content class="ion-padding ion-text-center">
+  <div class="welcome-container">
+    <div class="icon-circle">
+      <ion-icon name="beer-outline"></ion-icon>
+    </div>
+    <h1>¡Instala el Expendio!</h1>
+    <p>Para registrar tus ventas y ver el inventario sin interrupciones, añade esta app a tu pantalla de inicio.</p>
+  </div>
+  @if(!isIOS) {
+  <div class="instruction-box">
+    <div class="step">
+      <ion-badge color="primary">1</ion-badge>
+      <p>Haz clic en el botón de abajo</p>
+    </div>
+
+    <ion-button expand="block" shape="round" (click)="install()" [disabled]="!pwaService.canInstall">
+      <ion-icon name="download-outline" slot="start"></ion-icon>
+      Instalar Aplicación
+    </ion-button>
+    @if (!pwaService.canInstall) {
+    <p class="small-note">Si el botón no funciona, busca "Instalar aplicación" en el menú de tu navegador.</p>
+    }
+  </div>
+  }
+
+  @if(isIOS) {
+  <div class="instruction-box ios-box">
+    <h3>Instrucciones para iPhone</h3>
+
+    <div class="step">
+      <ion-badge color="primary">1</ion-badge>
+      <p>Toca el icono de <strong>Compartir</strong> en la barra inferior del navegador.</p>
+
+    </div>
+
+    <div class="step">
+      <ion-badge color="primary">2</ion-badge>
+      <p>Desliza hacia abajo y selecciona <strong>"Añadir a la pantalla de inicio"</strong>.</p>
+
+    </div>
+
+    <div class="step">
+      <ion-badge color="primary">3</ion-badge>
+      <p>Pulsa <strong>"Añadir"</strong> en la esquina superior derecha.</p>
+    </div>
+  </div>
+  }
+
+
+  <div class="footer-info">
+    <ion-note>Una vez instalada, busca el icono de la app entre tus aplicaciones.</ion-note>
+  </div>
+</ion-content>
