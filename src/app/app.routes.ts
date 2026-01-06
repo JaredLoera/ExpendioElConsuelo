@@ -5,6 +5,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { MySalesComponent } from './pages/my-sales/my-sales.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { authGuard } from './core/guards/auth/auth-guard';
+import { pwaGuardGuard } from './core/guards/pwaGuard/pwa-guard-guard';
+import { InstallInstructionsPageComponent } from './pages/install-instructions-page/install-instructions-page.component';
 export const routes: Routes = [
   
 
@@ -29,7 +31,7 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard,pwaGuardGuard]
   }
   ,
     {
@@ -37,6 +39,10 @@ export const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full'
   },
+    {
+      path: 'install-instructions',
+      component: InstallInstructionsPageComponent
+    }
 ];
 
 

@@ -1,0 +1,100 @@
+
+/* Contenedor principal de la página */
+.welcome-container {
+  margin-top: 40px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* El círculo con el icono de la cerveza */
+.welcome-container .icon-circle {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #3880ff 0%, #0054e9 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-container .icon-circle ion-icon {
+  font-size: 50px;
+  color: white;
+}
+
+/* Títulos y textos de bienvenida */
+.welcome-container h1 {
+  font-weight: 800;
+  color: #333;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.welcome-container p {
+  color: #666;
+  font-size: 1rem;
+  padding: 0 20px;
+  margin-top: 10px;
+}
+
+/* Caja contenedora de las instrucciones */
+.instruction-box {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin: 0 10px;
+}
+
+/* Estilo de cada paso (número + texto) */
+.instruction-box .step {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.instruction-box .step ion-badge {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 1rem;
+  border-radius: 50%;
+  min-width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.instruction-box .step p {
+  margin: 0;
+  color: #444;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Notas pequeñas al pie de las cajas */
+.small-note {
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* Contenedor del pie de página */
+.footer-info {
+  margin-top: 30px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+/* Estilo específico para resaltar el botón de iOS */
+.ios-box h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: var(--ion-color-dark);
+}
