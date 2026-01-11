@@ -1,0 +1,151 @@
+<app-header [title]="'Control de Inventario'"></app-header>
+
+<ion-content class="ion-padding gray-bg">
+  <div class="header-stats">
+    <p>Basado en niveles críticos de stock</p>
+    <ion-button id="open-modal-stock" expand="block" color="primary">
+      <ion-icon name="add-outline" slot="start"></ion-icon> Añadir Stock
+    </ion-button>
+  </div>
+
+  @for (item of stocks; track item.id) {
+  @let desglose = obtenerStockDesglosado(item.totalUnits, item.product);
+  @let progreso = getProgreso(item.totalUnits, item.minStock);
+  @let colorEstado = getColor(item.totalUnits, item.minStock);
+
+  <ion-card class="stock-card">
+    <ion-card-content>
+      <div class="top-section">
+        <img [src]="item.product.imagen" class="mini-thumb">
+        <div class="title-area">
+          <h2>{{ item.product.name }}</h2>
+          <ion-badge mode="ios" [color]="colorEstado">
+            Total: {{ item.totalUnits }} unidades
+          </ion-badge>
+        </div>
+      </div>
+
+      <div class="visual-inventory">
+        <div class="inventory-box">
+          <div class="data">
+            <span class="value">{{ desglose.cajas }}</span>
+            <span class="label">{{ desglose.esCaguama ? 'Cartones' : 'Charolas' }}</span>
+          </div>
+        </div>
+        <div class="divider"></div>
+        @if (!desglose.esCaguama) {
+        <div class="inventory-box">
+          <div class="data">
+            <span class="value">{{ desglose.six }}</span>
+            <span class="label">Six</span>
+          </div>
+        </div>
+        <div class="divider"></div>
+        }
+        <div class="inventory-box">
+          <div class="data">
+            <span class="value">{{ desglose.unidades }}</span>
+            <span class="label">Piezas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="status-footer">
+        <div class="labels">
+          <span>Mínimo: {{ item.minStock }}</span>
+          <span>{{ (progreso * 100).toFixed(0) }}%</span>
+        </div>
+        <ion-progress-bar [color]="colorEstado" [value]="progreso"></ion-progress-bar>
+      </div>
+
+      @if (item.totalUnits <= item.minStock) { <div class="alert-msg">
+        <ion-icon name="alert-circle-outline"></ion-icon>
+        ¡Necesitas surtir!
+        </div>
+        }
+    </ion-card-content>
+  </ion-card>
+  }
+
+  <ion-modal trigger="open-modal-stock" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="paso === 1 ? cancel() : paso = paso - 1">
+              <ion-icon [name]="paso === 1 ? 'close' : 'arrow-back'"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title>Añadir Stock</ion-title>
+          <ion-buttons slot="end">
+            @if (paso === 3) {
+            <ion-button (click)="confirmarSurtido()" color="success" [strong]="true">LISTO</ion-button>
+            }
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding">
+        @if (paso === 1) {
+        <ion-grid>
+          <ion-row>
+            @for (marca of Brands; track marca.id) {
+            <ion-col size="6" (click)="seleccionarMarca(marca.name, marca.id!)">
+              <div class="card-marca" [style.background-image]="'url(' + marca.imagen + ')'">
+                <div class="overlay"><span>{{ marca.name }}</span></div>
+              </div>
+            </ion-col>
+            }
+          </ion-row>
+        </ion-grid>
+        }
+
+        @if (paso === 2) {
+        <div class="presentacion-container">
+          <ion-list-header>
+            <h4>{{ seleccion.marca }}</h4>
+          </ion-list-header>
+          <ion-grid>
+            <ion-row>
+              @for (product of products; track product.id) {
+              <ion-col size="6" (click)="seleccionarPresentacion(product)">
+                <div class="card-producto">
+                  <div class="info-texto"><span class="nombre-prod">{{ product.name }}</span></div>
+                  <div class="thumb-container"><img [src]="product.imagen"></div>
+                </div>
+              </ion-col>
+              }
+            </ion-row>
+          </ion-grid>
+        </div>
+        }
+
+        @if (paso === 3) {
+        <div class="confirmacion-container">
+          <img [src]="seleccionadaImagen" class="img-confirmacion">
+          <h2>{{ seleccion.presentacion }}</h2>
+          <div class="selector-cantidad">
+            <p>¿Cuántos paquetes llegaron?</p>
+            <div class="controles">
+              <ion-button fill="clear" (click)="cambiarCantidad(-1)">
+                <ion-icon name="remove-circle-outline"></ion-icon>
+              </ion-button>
+
+              <ion-input type="number" inputmode="numeric" [(ngModel)]="seleccion.cantidad"
+                (ionInput)="validarInputManual()" class="input-cantidad" placeholder="0">
+              </ion-input>
+
+              <ion-button fill="clear" (click)="cambiarCantidad(1)">
+                <ion-icon name="add-circle-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+          <div class="info-calculo">
+            <ion-note>Total a sumar: <b>{{ seleccion.cantidad * seleccion.unidadesPorPaquete }} piezas</b></ion-note>
+          </div>
+        </div>
+        }
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

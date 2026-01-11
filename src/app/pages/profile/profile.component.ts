@@ -15,24 +15,23 @@ import {
   IonButtons,
   IonBackButton } from "@ionic/angular/standalone";
 import { Router } from "@angular/router";
+import { HeaderComponent } from "../header/header.component";
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
   imports: [
-    IonButtons, 
-    IonBackButton,
-    IonToolbar,
-    IonTitle,
+
     IonContent,
     IonButton,
     CommonModule,
     IonLabel,
-    IonHeader,
+    
     IonIcon,
-    IonItem
-  ]
+    IonItem,
+    HeaderComponent
+]
 })
 export class ProfileComponent implements OnInit {
   user: user | null = null;

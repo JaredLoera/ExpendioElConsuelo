@@ -17,5 +17,7 @@ export class User {
  createUser(user: user): Observable<responseMessage> {
     return this.http.post<responseMessage>(`${this.apiUrl}/users`, user);
   }
-
+  getUsers(): Observable<user[]> {
+    return this.http.get<user[]>(`${this.apiUrl}/users`);
+  }
 }

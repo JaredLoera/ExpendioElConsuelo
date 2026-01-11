@@ -1,0 +1,189 @@
+
+/* Configuración General */
+.gray-bg {
+  --background: #f4f7f6;
+}
+
+/* Tarjeta de Stock Principal */
+.stock-card {
+  margin: 12px 0;
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.top-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.mini-thumb {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.title-area h2 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Grilla de Inventario (Cajas, Six, Piezas) */
+.visual-inventory {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.inventory-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.inventory-box .value {
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1;
+  display: block;
+}
+
+.inventory-box .label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: #777;
+}
+
+.divider {
+  width: 1px;
+  height: 30px;
+  background: #ddd;
+}
+
+/* Barra de Progreso y Alerta */
+.status-footer {
+  margin-top: 10px;
+}
+
+.status-footer .labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+}
+
+.alert-msg {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 8px;
+  background: rgba(235, 68, 90, 0.1);
+  color: #eb445a;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+/* Estilos del Modal (Pasos 1, 2 y 3) */
+.card-marca {
+  height: 120px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.card-producto {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+.info-texto { flex: 1; }
+.nombre-prod { font-size: 0.85rem; font-weight: bold; color: #333; }
+
+.thumb-container img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+/* Confirmación de Surtido (Paso 3) */
+.confirmacion-container {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.img-confirmacion {
+  max-height: 120px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.controles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.input-cantidad {
+  --text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  max-width: 100px;
+  border-bottom: 2px solid var(--ion-color-primary);
+}
+
+.info-calculo {
+  background: #f0f4ff;
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+/* Quitar flechas nativas del navegador (Chrome, Safari, Edge, Opera) */
+.input-cantidad input::-webkit-outer-spin-button,
+.input-cantidad input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Quitar flechas nativas en Firefox */
+.input-cantidad {
+  --text-align: center;
+  font-size: 2.8rem; /* Un poco más grande para facilitar la lectura */
+  font-weight: 800;
+  max-width: 120px;
+  border-bottom: 3px solid var(--ion-color-primary);
+  appearance: textfield; /* Para Firefox */
+}
+
+/* Mejorar el tamaño de los iconos de los botones laterales */
+.controles ion-button ion-icon {
+  font-size: 3rem;
+}

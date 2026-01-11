@@ -1,0 +1,106 @@
+<app-header [title]="'Crear Cuenta'"></app-header>
+
+<ion-content class="ion-padding">
+  <div class="form-header ion-text-center">
+    <div class="avatar-circle">
+      <ion-icon name="person-add-outline"></ion-icon>
+    </div>
+    <p>Registra un nuevo vendedor para el expendio</p>
+  </div>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="custom-form">
+    <div class="input-wrapper">
+      <ion-item lines="none" class="custom-item">
+        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <ion-input 
+          label="Nickname" 
+          labelPlacement="floating" 
+          formControlName="nickname"
+          placeholder="Ej. jared_salazar">
+        </ion-input>
+      </ion-item>
+    </div>
+
+    <div class="input-wrapper">
+      <ion-item lines="none" class="custom-item">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-input 
+          type="email" 
+          label="Correo electrónico" 
+          labelPlacement="floating" 
+          formControlName="email"
+          placeholder="ejemplo@correo.com">
+        </ion-input>
+      </ion-item>
+    </div>
+
+    <div class="input-wrapper">
+      <ion-item lines="none" class="custom-item">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input 
+          [type]="showPassword ? 'text' : 'password'" 
+          label="Contraseña" 
+          labelPlacement="floating" 
+          formControlName="password">
+        </ion-input>
+        <ion-button slot="end" fill="clear" (click)="showPassword = !showPassword" class="eye-btn">
+          <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </div>
+
+    <div class="ion-padding-top">
+      <ion-button 
+        expand="block" 
+        type="submit" 
+        [disabled]="userForm.invalid" 
+        shape="round" 
+        class="submit-btn">
+        REGISTRAR USUARIO
+      </ion-button>
+    </div>
+  </form>
+
+  <div class="user-list-container">
+  <div class="list-header">
+    <h3>Usuarios Registrados</h3>
+    <ion-badge color="primary">{{ usuarios.length }} usuarios</ion-badge>
+  </div>
+
+  <ion-list lines="none">
+    @for (user of usuarios; track user.id) {
+    <ion-item-sliding>
+      <ion-item class="user-item" [class.user-disabled]="user.active">
+        <ion-avatar slot="start">
+          <div class="avatar-text">{{ user.fullName.substring(0, 2).toUpperCase() }}</div>
+        </ion-avatar>
+
+        <ion-label>
+          <h2>{{ user.fullName }}</h2>
+          <p>{{ user.email }}</p>
+          <ion-text [color]="!user.active ? 'success' : 'danger'">
+            <small>{{ !user.active ? '● Activo' : '● Inactivo' }}</small>
+          </ion-text>
+        </ion-label>
+
+        <ion-button slot="end" fill="clear" (click)="toggleUserStatus(user)">
+          <ion-icon 
+            slot="icon-only" 
+            [name]="user.active ? 'person-remove-outline' : 'person-add-outline'"
+            [color]="user.active ? 'danger' : 'success'">
+          </ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option 
+          [color]="user.active ? 'danger' : 'success'" 
+          (click)="toggleUserStatus(user)">
+          <ion-icon slot="icon-only" [name]="user.active ? 'trash' : 'checkmark-circle'"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+    }
+  </ion-list>
+</div>
+</ion-content>

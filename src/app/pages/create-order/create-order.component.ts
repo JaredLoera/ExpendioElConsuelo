@@ -20,6 +20,8 @@ import { Products } from 'src/app/core/services/products/products';
 import { product } from 'src/app/core/interfaces/product';
 import { Orders } from 'src/app/core/services/orders/orders';
 import { responseMessage } from 'src/app/core/interfaces/responseMessage';
+import { HeaderComponent } from '../header/header.component';
+import {ViewWillEnter} from '@ionic/angular';
 @Component({
   selector: 'app-create-order',
   templateUrl: './create-order.component.html',
@@ -27,7 +29,6 @@ import { responseMessage } from 'src/app/core/interfaces/responseMessage';
   imports: [IonItemOption, IonItemOptions, IonItemSliding, IonFooter, IonNote, IonList, IonBadge, IonCol, IonGrid, IonRow, IonListHeader, IonLabel, IonIcon,
     IonHeader,
     IonButtons,
-    IonBackButton,
     FormsModule,
     IonButton,
     IonContent,
@@ -39,10 +40,9 @@ import { responseMessage } from 'src/app/core/interfaces/responseMessage';
     IonItemSliding,
     IonItemOptions,
     IonItemOption,
-    IonIcon
-  ]
+    IonIcon, HeaderComponent]
 })
-export class CreateOrderComponent implements OnInit {
+export class CreateOrderComponent implements OnInit, ViewWillEnter {
 
   constructor(private productsService: Products, private ordersService: Orders) { }
 
@@ -66,8 +66,9 @@ export class CreateOrderComponent implements OnInit {
   message = 'De clic en el boton para añadir una venta.';
   name!: string;
 
-  ngOnInit() {
-    this.productsService.getBrands().subscribe({
+  ionViewWillEnter(): void {
+    this.resetFormulario();
+      this.productsService.getBrands().subscribe({
       next: (brands: brand[]) => {
         this.listBrands = brands;
         console.log('Marcas obtenidas:', this.listBrands);
@@ -76,6 +77,9 @@ export class CreateOrderComponent implements OnInit {
         console.error('Error fetching brands:', error);
       }
     });
+  }
+  ngOnInit() {
+  
   }
   seleccionarMarca(nombre: string, id: number) {
     this.seleccion.marca = nombre;

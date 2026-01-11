@@ -7,6 +7,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { authGuard } from './core/guards/auth/auth-guard';
 import { pwaGuardGuard } from './core/guards/pwaGuard/pwa-guard-guard';
 import { InstallInstructionsPageComponent } from './pages/install-instructions-page/install-instructions-page.component';
+import { StockComponent } from './pages/stock/stock.component';
+import { CreateUsersComponent } from './pages/create-users/create-users.component';
 export const routes: Routes = [
   
 
@@ -25,6 +27,14 @@ export const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent
+      },
+      {
+        path: 'stock',
+        component: StockComponent
+      },
+      {
+        path: 'users',
+        component: CreateUsersComponent
       }
     ]
   },
