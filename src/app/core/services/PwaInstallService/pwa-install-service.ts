@@ -27,6 +27,7 @@ export class PwaInstallService {
       }
     });
   }
+  //o esta en escritorio o esta instalada
   public isPWA(): boolean {
     return window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone;
   }

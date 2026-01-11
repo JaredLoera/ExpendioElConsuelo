@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { SwUpdate } from '@angular/service-worker';
 import Swal from 'sweetalert2';
+import { interval } from 'rxjs';
 
 
 @Component({
@@ -11,6 +12,14 @@ import Swal from 'sweetalert2';
 })
 export class AppComponent {
      constructor(private swUpdate: SwUpdate) {
+
+      interval(5000).subscribe(() => {
+        this.checkForUpdates();
+      });
+    }
+
+  checkForUpdates() {
+
     if (this.swUpdate.isEnabled) {
       this.swUpdate.versionUpdates.subscribe(event => {
         if (event.type === 'VERSION_READY') {

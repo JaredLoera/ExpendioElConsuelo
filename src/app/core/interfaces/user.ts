@@ -1,7 +1,8 @@
 export interface user {
     id?:        number;
-    full_name:  string;
+    fullName:  string;
     email:     string;
+    active?:    boolean;
     password?:  string;
     createdAt?: Date;
     updatedAt?: Date;

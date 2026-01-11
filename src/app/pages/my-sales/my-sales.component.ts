@@ -1,55 +1,56 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ViewWillEnter } from '@ionic/angular';import {
+import { ViewWillEnter } from '@ionic/angular';
+import {
   IonContent,
   IonHeader,
   IonTitle,
   IonToolbar,
 
   IonButtons,
-  IonBackButton, IonList, IonCard, IonBadge, IonListHeader, IonLabel, IonItem, IonAvatar, IonNote, IonCardContent } from '@ionic/angular/standalone';
+  IonBackButton, IonList, IonCard, IonBadge, IonListHeader, IonLabel, IonItem, IonAvatar, IonNote, IonCardContent
+} from '@ionic/angular/standalone';
 
 import { Resumenes } from 'src/app/core/services/resumenes/resumenes';
 import { resumProducts } from 'src/app/core/interfaces/resumProducts';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-my-sales',
   templateUrl: './my-sales.component.html',
   styleUrls: ['./my-sales.component.css'],
-    imports: [
-      IonCardContent, 
-      IonNote, IonAvatar, IonItem, IonLabel, IonListHeader, IonBadge, IonCard, IonList, 
-      IonHeader,
-    IonButtons,
-    IonBackButton,
+  imports: [
+    IonCardContent,
+    IonNote, IonAvatar, IonItem, IonLabel, IonListHeader, IonBadge, IonCard, IonList,
+
     FormsModule,
     IonContent,
-    IonTitle,
-    IonToolbar,
+
+    HeaderComponent
 
   ]
 })
-export class MySalesComponent  implements  ViewWillEnter {
+export class MySalesComponent implements ViewWillEnter {
 
   constructor(private resumenesService: Resumenes) { }
-ventas: resumProducts[] = [];
+  ventas: resumProducts[] = [];
 
-getResumenes() {
+  getResumenes() {
     this.resumenesService.getResumenForUser().subscribe({
       next: (data: resumProducts[]) => {
         this.ventas = data;
       },
       error: (error) => {
-      console.error('Error fetching sales summary:', error);
-    }
-  });
-}
-ionViewWillEnter(): void {
-this.getResumenes();
-}
+        console.error('Error fetching sales summary:', error);
+      }
+    });
+  }
+  ionViewWillEnter(): void {
+    this.getResumenes();
+  }
 
 
-calcularGranTotal(): number {
-  return this.ventas.reduce((acc, curr) => acc + parseFloat(curr.total), 0);
-}
+  calcularGranTotal(): number {
+    return this.ventas.reduce((acc, curr) => acc + parseFloat(curr.total), 0);
+  }
 }
